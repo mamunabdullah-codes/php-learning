@@ -1,14 +1,16 @@
 <?php
 // i. find maximum number from an array of numbers
-$numbers = [93, 23, 12, 45, 67, 89, 10, 243, 56, 78, 90];
+$numbers = [93, 23, 12, 45, 67, 89, 10, 43, 56, 78, 90, 93, 40, 90, 85, 19, 93];
 $maxNumber = max($numbers);
 echo "The maximum number is " . $maxNumber;
 echo "<br>";
 
 // ii. Find 2nd maximum number from an array
 // rsort : sorts an array in reverse order (highest to lowest).
-$maxToLowNum = rsort($numbers);
-echo ("The second maximum number is " . $numbers[2]);
+rsort($numbers);
+$uniqueNumbers = array_values(array_unique($numbers));
+// $max2 = array_values($uniqueNumbers, 1, 1);
+echo ("The second maximum number is " . $uniqueNumbers[1]);
 echo "<br>";
 
 // iii. Sort array from min to max
@@ -40,6 +42,14 @@ if ($result === false) {
 }
 echo "<br>";
 
+// other way
+if (in_array($search, $array)) {
+    echo "The value is in the array";
+} else {
+    echo "The value is not in the array";
+}
+echo "<br>";
+
 // vii. Show array data in lowercase and uppercase
 $array = ["Red", "Green", "Blue", "Yellow", "Orange", "Pink"];
 $array = array_map('strtolower', $array);
@@ -63,7 +73,14 @@ $array = array_unique($array);
 echo "The unique values are " . implode(", ", $array);
 echo "<br>";
 
-// x. Check if email address is unique
+// x. check if email address is unique
+$email = "example@example.com";
+$existingEmails = ["user1@example.com", "user2@example.com", "user3@example.com"];
+$isUnique = !in_array($email, $existingEmails);
+echo $isUnique ? "The email address is unique" : "The email already exists";
+echo "<br>";
+
+//  Check if email address is valid
 $email = "<almamuneco@gmail.com>";
 $email = strtolower($email);
 $email = str_replace(" ", "", $email);
@@ -81,25 +98,29 @@ if ($email === false) {
 echo "<br>";
 
 // xi. Check unique username from an array
-$usernames = ["mamun", "akram", "mahmoud", "mamun", "akram", "mahmoud"];
-$usernames = array_unique($usernames);
-echo "The unique usernames are " . implode(", ", $usernames);
+$username = "mamun";
+$existingUserNames = ["mamun", "akram", "mahmoud", "mamun", "akram", "mahmoud"];
+$isUniqueUser = !in_array($username, $existingUserNames);
+echo $isUniqueUser ? "The username is unique" : "The username already exists";
 echo "<br>";
 
 // xii. Merge 2 comma separated lists with unique value only
 $list1 = "red, green, blue, yellow, orange, pink";
 $list2 = "red, green, blue, yellow, orange, pink, mamun, akram, mahmoud";
-$list1 = explode(",", $list1);
-$list2 = explode(",", $list2);
-$list3 = array_merge($list1, $list2);
-$list3 = array_unique($list3);
-echo "The merged list is " . implode(", ", $list3);
+$mergedList1 = implode(", ", array_unique(array_merge(explode(", ", $list1), explode(", ", $list2))));
+// $mergedList = array_merge(explode(",", $list1), explode(",", $list2));
+// $mergedList = array_unique($mergedList);
+echo "xii. The merged list is: " . $mergedList1;
 echo "<br>";
 
 /*************************************************************************
  * XIII. DIFFERENCE BETWEEN 2 MULTI-DIMENSIONAL ARRAYS => NOT UNDERSTOOD *
  *************************************************************************/
-
+$array1 = array('a' => 1, 'b' => 2, 'c' => 3);
+$array2 = array('b' => 2, 'c' => 3, 'd' => 4);
+$diff = array_diff_assoc($array1, $array2);
+print_r($diff);
+echo "<br>";
 $array1 = ["red", "green", "blue", "yellow", "orange", "pink", 25, 65, true, null];
 $array2 = ["mamun", "Abdullah", "red", 95, 35, 60, "green", "blue"];
 $array3 = array_diff($array1, $array2);
@@ -130,7 +151,12 @@ $array1 = ["red", "green", "blue", "yellow", "orange", "pink"];
 $array2 = ["mamun", "Abdullah", "red", 95, 35, 60, "blue"];
 $array3 = array_unique(array_merge($array1, $array2));
 echo "The union of the 2 arrays is " . implode(", ", $array3);
+echo "<br>";
 
 /***************************************************************************
  *   XVI. FILTER OUT ARRAY DATA WITH SOME SPECIFIC KEYS => NOT UNDERSTOOD  *
  ***************************************************************************/
+$data = array('name' => 'Mamun', 'age' => 35, 'city' => 'Khulna');
+$allowedKeys = array('name', 'city');
+$filterData = array_intersect_key($data, array_flip($allowedKeys));
+print_r($filterData);
