@@ -59,7 +59,7 @@ if (isset($_POST['sub123']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
           <input type="text" placeholder="Enter Name" name="name" value= "<?=$name ?? null;?>" class="form-control <?=isset($errName) ? 'is-invalid' : null?> <?=isset($crrName) ? 'is-valid' : null;?>">
           <label for="" class="form-label">Enter Name</label>
           <div class="invalid-feedback">
-            <? $errName ?? null;?>
+            <?=$errName ?? null;?>
           </div>
           <div class="valid-feedback ">
           <?=$crrName ?? null;?>
@@ -111,7 +111,7 @@ if (isset($_POST['sub123']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="python" class="form-check-label">Python</label>
               </div>
             </div>
-            <div>
+            <div class="<?=isset($errSkills) ? 'text-danger' : (isset($skills) ? 'text-success' : null);?>">
               <?=$errSkills ?? null;?>
               <?php
 if (isset($skills)) {
